@@ -12,6 +12,4 @@ chmod a+x ./run.sh
 ./run.sh
 ```
 
-
-
-There is also a demo of the current master at http://todo
+There is also a demo of the current master at https://monkeybonsai.github.io/assignment
