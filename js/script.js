@@ -1,2 +1,2 @@
 
-console.log('Hello Monkey Bonsai');
+console.log('Hello Bonsai');
