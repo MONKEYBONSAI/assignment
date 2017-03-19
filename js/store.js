@@ -74,6 +74,46 @@ class Secret_Store {
             }
         }, 0);
     }
+    
+    /**
+     * Stores our secret information and our question array.
+     * @param {object}   params    Options object
+     * @param {Secret_Store~onSuccess} onSuccess Handle response on success
+     * @param {Secret_Store~onFail}    onFail    Handle error on fail
+     */
+    Save_Secret(params, onSuccess, onFail) {
+        setTimeout(function() {
+            // input validation
+            if (!"questions" in params || !"data" in params) {
+                onFail("Questions and Data required.");
+                return;
+            }
+
+            if (!"answers" in params.data) {
+                onFail("Answers must be present in secret data.");
+                return;
+            }
+
+            if (params.questions.length !== params.data.answers.length) {
+                onFail("Question and answer count missmatch.");
+                return;
+            }
+            
+            // encrypts our secret data
+            var secret_json = JSON.stringify(params.data);
+            // var secret_encrypted = Encrypt(secret_json);
+            var secret_encrypted = secret_json;
+            
+            // attempts to store our question array and secret data.
+            try {
+                localStorage.setItem("mb_secret", secret_encrypted);
+                localStorage.setItem("mb_questions", params.questions);
+            } catch (e) {
+                onFail(e);
+                return;
+            }
+        }, 0);
+    }
 }
 
 /**
@@ -83,7 +123,7 @@ class Secret_Store {
  */
 
 /**
- * This callback is passed the stored data on fail.
+ * This callback is passed the error message on fail.
  * @callback Secret_Store~onFail
  * @param {string} response The error message.
  */
