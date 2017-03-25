@@ -13,3 +13,12 @@ chmod a+x ./run.sh
 ```
 
 There is also a demo of the current master at https://monkeybonsai.github.io/assignment
+
+
+**Unit testing (Frontend)**
+
+Mocha and Chai have been included to easily get up and running with javascript tests in the browser. Run `./run.js` to run the simple web server in docker and navigate to http://localhost:9000/tests.html
+
+* Unit tests can be added by appending them to `/js/script_test.js` 
+* At the time of writing, a basic way to export functions and objects is to attach them to the global `monkey` object as seen in `/js/script.js`
+
