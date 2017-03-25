@@ -1,11 +1,5 @@
 /* global sjcl */
-// Usage (hint: try this in the console windows of your browser):
-// window.monkey.save('foo', 'somestringoftexthere'); 
-// window.monkey.fetch('foo') /* "somestringoftexthere" */
-// var e = window.monkey.encrypt('supersecret', 'some plain text'); 
-// window.monkey.decrypt('supersecret', e) /* "some plain text" */
 
-// Simple LocalStorage Methods
 var save = function (key, data) {
   localStorage.setItem(key, data);
 };
