@@ -28,3 +28,7 @@ Mocha and Chai have been included to easily get up and running with javascript t
 * Run `npm install`
 
 This will install some cli tools that are useful for keeping things tidy, namely eslint. Most editors will have an eslint plugin, install the appropriate plugin or extension for your editor and fix any inconsistencies.
+
+**In browser encryption**
+
+For a quick in-browser encryption implementation the Stanford Javascript Crypto Library [https://github.com/bitwiseshiftleft/sjcl/] was used.
