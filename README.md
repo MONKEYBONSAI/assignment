@@ -22,3 +22,9 @@ Mocha and Chai have been included to easily get up and running with javascript t
 * Unit tests can be added by appending them to `/js/script_test.js` 
 * At the time of writing, a basic way to export functions and objects is to attach them to the global `monkey` object as seen in `/js/script.js`
 
+**ESLint for style compliant javascript**
+
+* change into the root directory of the project
+* Run `npm install`
+
+This will install some cli tools that are useful for keeping things tidy, namely eslint. Most editors will have an eslint plugin, install the appropriate plugin or extension for your editor and fix any inconsistencies.
