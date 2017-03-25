@@ -1,11 +1,11 @@
-
-var add = function(a, b) {
-  return a + b; 
+// Simple LocalStorage Methods
+var save = function (key, data) {
+  localStorage.setItem(key, data);
 };
 
-var subtract = function(a, b) {
-  return a - b;
+var fetch = function (key) {
+  return localStorage.getItem(key);
 };
 
 // hack export via global monkey
-monkey = { add, subtract };
+window.monkey = { save: save, fetch: fetch };

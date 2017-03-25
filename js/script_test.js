@@ -1,13 +1,30 @@
-chai.should();
+/* global monkey */
+chai.should(); // eslint-disable-line
 
-describe('add', function() {
-  it('should return the sum of 1 + 2', function() {
-    monkey.add(1, 2).should.equal(3);
+describe('the monkey', () => {
+  beforeEach(() => {
+    localStorage.clear();
   });
-});
 
-describe('subtract', function() {
-  it('should return the difference of 5 - 1', function() {
-    monkey.subtract(5, 1).should.equal(4);
+  after(() => {
+    localStorage.clear();
+  });
+
+  describe('save', () => {
+    it('should put a string into localStorage', function () {
+      monkey.save('foo', 'bar');
+      localStorage.getItem('foo')
+      .should
+      .equal('bar');
+    });
+  });
+
+  describe('fetch', () => {
+    it('should get a string from localStorage', function () {
+      localStorage.setItem('foo', 'bar');
+      monkey.fetch('foo')
+      .should
+      .equal('bar');
+    });
   });
 });
