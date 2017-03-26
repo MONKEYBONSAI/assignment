@@ -64,8 +64,8 @@ describe('behaviours', () => {
         window.behaviours.saveSecrets();
       });
 
-      it('should update the status text to say "Invalid email address"', () => {
-        let expectedMessage = 'Invalid email address';
+      it('should update the status text to say "Invalid Email Address"', () => {
+        let expectedMessage = 'Invalid Email Address';
         jQuery(`#${statusId}`).html().should.equal(expectedMessage);
       });
 
@@ -93,7 +93,7 @@ describe('behaviours', () => {
     });
 
     describe('when no data has been saved using the current email address', () => {
-      let expectedMessage = 'Invalid email address';
+      let expectedMessage = 'Invalid Email Address';
 
       beforeEach(() => {
         jQuery('body').append(`<textarea id="${textAreaId}"></textarea>`);
