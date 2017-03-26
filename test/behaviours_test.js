@@ -70,7 +70,7 @@ describe('behaviours', () => {
       });
 
       it('should not store anything in localStorage', () => {
-        localStorage.getItem('').should.be.null;
+        JSON.stringify(localStorage.getItem('')).should.equal('null');
       });
     });
   });
