@@ -29,10 +29,10 @@ describe('the monkey', () => {
     });
   });
 
-  describe('fetch', () => {
+  describe('load', () => {
     it('should get a string from localStorage', function () {
       localStorage.setItem('foo', 'bar');
-      monkey.fetch('foo')
+      monkey.load('foo')
       .should
       .equal('bar');
     });
