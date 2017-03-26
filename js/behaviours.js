@@ -5,6 +5,12 @@ var loadSecrets = function () {
   var password = jQuery('#email').val();
 
   var cipher = monkey.load(password);
+
+  if (null === cipher || cipher.length <= 0) {
+    $('#status').text('Invalid Email Address');
+    return;
+  }
+  
   var plainText = monkey.decrypt(password, cipher);
 
   textArea.val(plainText);
