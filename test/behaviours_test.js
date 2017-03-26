@@ -25,11 +25,13 @@ describe('behaviours', () => {
 
   const textAreaId = 'secrets';
   const emailId = 'email';
+  const statusId = 'status';
 
   afterEach(() => {
     // Cleanup by removing elements from the DOM.
     jQuery(`#${textAreaId}`).remove();
     jQuery(`#${emailId}`).remove();
+    jQuery(`#${statusId}`).remove();
     localStorage.clear();
   });
 
@@ -52,17 +54,36 @@ describe('behaviours', () => {
   });
 
   describe('behaviours - loadSecrets', () => {
-    beforeEach(() => {
-      jQuery('body').append(`<textarea id="${textAreaId}"></textarea>`);
-      jQuery('body').append(`<input id="${emailId}" value="${email}">`);
+    describe('when data has been encrypted using the email address', () => {
+      beforeEach(() => {
+        jQuery('body').append(`<textarea id="${textAreaId}"></textarea>`);
+        jQuery('body').append(`<input id="${emailId}" value="${email}">`);
+        jQuery('body').append(`<span id="${statusId}">FOO</span>`);
 
-      let e = window.monkey.encrypt(email, plainText);
-      window.monkey.save(email, e);
-      window.behaviours.loadSecrets();
+        let e = window.monkey.encrypt(email, plainText);
+        window.monkey.save(email, e);
+        window.behaviours.loadSecrets();
+      });
+
+      it('should populate the textarea with expected plain text', () => {
+        jQuery(`#${textAreaId}`).val().should.equal(plainText);
+      });
     });
 
-    it('should populate the textarea with expected plain text', () => {
-      jQuery(`#${textAreaId}`).val().should.equal(plainText);
+    describe('when no data has been saved using the current email address', () => {
+      let expectedMessage = 'Invalid email address';
+
+      beforeEach(() => {
+        jQuery('body').append(`<textarea id="${textAreaId}"></textarea>`);
+        jQuery('body').append(`<input id="${emailId}" value="BLAH">`);
+        jQuery('body').append(`<span id="${statusId}">FOO</span>`);
+
+        window.behaviours.loadSecrets();
+      });
+
+      it('should update the status with expected message', () => {
+        jQuery(`#${statusId}`).html().should.equal(expectedMessage);
+      });
     });
   });
 });
