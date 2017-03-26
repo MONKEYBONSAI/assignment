@@ -36,20 +36,42 @@ describe('behaviours', () => {
   });
 
   describe('behaviours - saveSecrets', () => {
-    beforeEach(() => {
-      jQuery('body').append(`<textarea id="${textAreaId}">${plainText}</textarea>`);
-      jQuery('body').append(`<input id="${emailId}" value="${email}">`);
-      localStorage.clear();
+    describe('when a valid email address is used', () => {
+      beforeEach(() => {
+        jQuery('body').append(`<textarea id="${textAreaId}">${plainText}</textarea>`);
+        jQuery('body').append(`<input id="${emailId}" value="${email}">`);
+        localStorage.clear();
 
-      window.behaviours.saveSecrets();
+        window.behaviours.saveSecrets();
+      });
+
+      it('should save a new localStorage blob using the email as a key', () => {
+        localStorage.getItem(email).should.be.a('string');
+      });
+
+      it('should store something other than the plain text', () => {
+        localStorage.getItem(email).should.not.equal(plainText);
+      });
     });
 
-    it('should save a new localStorage blob using the email as a key', () => {
-      localStorage.getItem(email).should.be.a('string');
-    });
+    describe('when the email address field is empty', () => {
+      beforeEach(() => {
+        jQuery('body').append(`<textarea id="${textAreaId}">${plainText}</textarea>`);
+        jQuery('body').append(`<input id="${emailId}" value="">`);
+        jQuery('body').append(`<span id="${statusId}">FOO</span>`);
+        localStorage.clear();
 
-    it('should store something other than the plain text', () => {
-      localStorage.getItem(email).should.not.equal(plainText);
+        window.behaviours.saveSecrets();
+      });
+
+      it('should update the status text to say "Invalid email address"', () => {
+        let expectedMessage = 'Invalid email address';
+        jQuery(`#${statusId}`).html().should.equal(expectedMessage);
+      });
+
+      it('should not store anything in localStorage', () => {
+        localStorage.getItem('').should.be.null;
+      });
     });
   });
 
