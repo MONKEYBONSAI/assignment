@@ -10,6 +10,8 @@ var loadSecrets = function () {
   textArea.val(plainText);
 
   // Update status here.
+  $('#status').text('Loaded Successfully');
+
 };
 
 var saveSecrets = function () {
