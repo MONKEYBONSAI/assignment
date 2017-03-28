@@ -16,5 +16,10 @@ var decrypt = function (password, encrypted) {
   return sjcl.decrypt(password, encrypted);
 };
 
+var hash = function(value) {
+  var b = sjcl.hash.sha256.hash(value);  
+  return sjcl.codec.hex.fromBits(b);
+};
+
 // hack export via global monkey
-window.monkey = { save: save, load: load, encrypt: encrypt, decrypt: decrypt };
+window.monkey = { save: save, load: load, encrypt: encrypt, decrypt: decrypt, hash: hash };
